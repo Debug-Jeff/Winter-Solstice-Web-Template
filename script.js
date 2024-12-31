@@ -54,3 +54,116 @@ window.addEventListener("scroll", () => {
 window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 });
+// Get modal element
+const modal = document.getElementById('modal');
+
+// Get open modal buttons (boxes in your case)
+const boxElements = document.querySelectorAll('.box');
+
+// Get close button
+const closeBtn = document.querySelector('.close-btn');
+
+// Get the modal gallery container
+const modalGallery = document.getElementById('modal-gallery');
+
+// Image sets for each celebration
+const images = {
+    newgrange: [
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
+        'assets/img-11.jpg', 'assets/img-11.jpg'
+    ],
+    intiraymi: [
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
+        'assets/img-12.jpg', 'assets/img-12.jpg'
+    ],
+    modranicht: [
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
+        'assets/img-13.jpg', 'assets/img-13.jpg'
+    ],
+    koliada: [
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
+        'assets/img-8.jpg', 'assets/img-8.jpg'
+    ]
+};
+
+// Add click event listener to each box to open modal with specific images
+boxElements.forEach(box => {
+    box.addEventListener('click', () => {
+        const celebration = box.getAttribute('data-celebration');
+        modal.style.display = 'block'; // Show modal
+        document.body.style.overflow = 'hidden'; // Disable body scroll
+
+        // Clear previous gallery items
+        modalGallery.innerHTML = '';
+
+        // Get images for the selected celebration
+        const selectedImages = images[celebration];
+
+        // Add images to the modal gallery
+        selectedImages.forEach(src => {
+            const imgElement = document.createElement('img');
+            imgElement.src = src;
+            imgElement.alt = 'Celebration Image';
+            const galleryItem = document.createElement('div');
+            galleryItem.classList.add('gallery-item');
+            galleryItem.appendChild(imgElement);
+            modalGallery.appendChild(galleryItem);
+        });
+    });
+});
+
+// Add click event listener to close button to close modal
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none'; // Hide modal
+    document.body.style.overflow = 'auto'; // Re-enable body scroll
+});
+
+// Close modal if clicked outside the modal content
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none'; // Hide modal if clicked outside
+        document.body.style.overflow = 'auto'; // Re-enable body scroll
+    }
+});
+
+

@@ -119,7 +119,7 @@
 
     <section id="hemispheres">
         <div class="hem-content">
-            <h2>Solstice Across Hemispheres</h2>
+            <h2>Solstice Across Hemispheres</h2><span class="material-symbols-outlined"></span>
         <p>The experience of the solstice differs greatly between the Northern and Southern Hemispheres due to their
             opposite seasons.</p>
         <article class="hemisphere" id="northern-hemisphere">
@@ -149,35 +149,78 @@
 
     <section id="celebrations">
         <h2>Global Celebrations of the Winter Solstice</h2>
-
-        <article class="celebration" id="newgrange">
-            <h3>Newgrange - Ireland</h3>
-            <p>The prehistoric monument of Newgrange is aligned with the rising sun on the winter solstice. Built over
-                5,000 years ago, it predates Stonehenge and the Egyptian pyramids. Each year, a beam of sunlight
-                illuminates the inner chamber, symbolizing the victory of light over darkness.</p>
+    
+        <!-- Newgrange Celebration -->
+        <article class="celebration" id="newrange">
+            <div class="parent">
+                <div class="box" data-celebration="newgrange">
+                    <span class="hover-text">CLICK</span>
+                </div>
+                <div class="nr-text">
+                    <h3>Newgrange - Ireland</h3>
+                    <p>The prehistoric monument of Newgrange is aligned with the rising sun on the winter solstice. Built over
+                    5,000 years ago, it predates Stonehenge and the Egyptian pyramids. Each year, a beam of sunlight
+                    illuminates the inner chamber, symbolizing the victory of light over darkness.</p>
+                </div>
+            </div>
         </article>
-
+    
+        <!-- Inti Raymi Celebration -->
         <article class="celebration" id="intiraymi">
-            <h3>Inti Raymi - Peru</h3>
-            <p>Although traditionally held during the June solstice, which is the winter solstice in the Southern
-                Hemisphere, Inti Raymi is an ancient Incan festival honoring the Sun god Inti. The celebration includes
-                music, dancing, and sacrifices, reflecting the importance of the Sun in agricultural societies.</p>
+            <div class="parent">
+                <div class="box" data-celebration="intiraymi">
+                    <span class="hover-text">CLICK</span>
+                </div>
+                <div class="iy-text">
+                    <h3>Inti Raymi - Peru</h3>
+                    <p>Although traditionally held during the June solstice, which is the winter solstice in the Southern
+                    Hemisphere, Inti Raymi is an ancient Incan festival honoring the Sun god Inti. The celebration includes
+                    music, dancing, and sacrifices, reflecting the importance of the Sun in agricultural societies.</p>
+                </div>
+            </div>
         </article>
-
+    
+        <!-- Modranicht Celebration -->
         <article class="celebration" id="modranicht">
-            <h3>Modranicht - Anglo-Saxon Tradition</h3>
-            <p>Meaning "Mother's Night," Modranicht was observed by the Anglo-Saxons on the eve of the winter solstice.
-                It was a time to honor female deities and ancestral mothers, symbolizing fertility and the rebirth of
-                the Sun.</p>
+            <div class="parent">
+                <div class="box" data-celebration="modranicht">
+                    <span class="hover-text">CLICK</span>
+                </div>
+                <div class="mn-text">
+                    <h3>Modranicht - Anglo-Saxon Tradition</h3>
+                    <p>Meaning "Mother's Night," Modranicht was observed by the Anglo-Saxons on the eve of the winter solstice.
+                    It was a time to honor female deities and ancestral mothers, symbolizing fertility and the rebirth of
+                    the Sun.</p>
+                </div>
+            </div>
         </article>
-
+    
+        <!-- Koliada Celebration -->
         <article class="celebration" id="koliada">
-            <h3>Koliada - Eastern Europe</h3>
-            <p>Koliada is a Slavic festival celebrated during the winter solstice. Traditions include singing carols,
-                feasting, and lighting fires to symbolize the return of the Sun. The festival has influenced modern
-                Christmas and New Year traditions in the region.</p>
+            <div class="parent">
+                <div class="box" data-celebration="koliada">
+                    <span class="hover-text">CLICK</span>
+                </div>
+                <div class="kd-text">
+                    <h3>Koliada - Eastern Europe</h3>
+                    <p>Koliada is a Slavic festival celebrated during the winter solstice. Traditions include singing carols,
+                    feasting, and lighting fires to symbolize the return of the Sun. The festival has influenced modern
+                    Christmas and New Year traditions in the region.</p>
+                </div>
+            </div>
         </article>
+    
+        <!-- Modal (initially hidden) -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div class="gallery" id="modal-gallery">
+                    <!-- Dynamic images will be inserted here based on the selected celebration -->
+                </div>
+            </div>
+        </div>
     </section>
+    
 
     <section id="winter">
         <div class="breathe-animation">
@@ -187,54 +230,52 @@
 
     <section id="traditions">
         <div class="traditions-content">
-            <h2>Common Solstice Traditions</h2>
-        <ul>
-            <li><strong>Bonfires and Candles:</strong> Lighting fires and candles is a widespread tradition to represent
-                light overcoming darkness.</li>
-            <li><strong>Feasting:</strong> Communities gather to share meals, strengthening social bonds during the cold
-                months.</li>
-            <li><strong>Gift-Giving:</strong> Exchanging gifts symbolizes goodwill and sharing abundance.</li>
-            <li><strong>Decorating with Evergreens:</strong> Using evergreen plants like holly and mistletoe represents
-                eternal life and protection.</li>
-            <li><strong>Reflection and Renewal:</strong> The solstice is a time for introspection, setting intentions
-                for the coming year.</li>
-        </ul>
-        </div>
-        <!--<div id="photo-grid">
-            <div id="img-1">
-                <img src="assets/img-1.jpg" alt="Image-1" srcset="">
+            <div class="td-title">
+                <h2>Common Solstice Traditions</h2>
+            <div class="td-box" data-celebration="newgrange">
+                <span class="hover-text"></span>
             </div>
-            <div id="img-1">
-                <img src="assets/img-2.jpg" alt="Image-2" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-3.jpg" alt="Image-3" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-4.jpg" alt="Image-4" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-5.jpg" alt="Image-5" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-6.jpg" alt="Image-6" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-7.jpg" alt="Image-7" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-8.jpg" alt="Image-8" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-9.jpg" alt="Image-9" srcset="">
-            </div>
-            <div id="img-1">
-                <img src="assets/img-10.jpg" alt="Image-10" srcset="">
             </div>
             
-        </div>-->
+            <div class="td-content">
+                <ul>
+                    <li><strong>Bonfires and Candles:</strong> Lighting fires and candles is a widespread tradition to represent
+                        light overcoming darkness.</li>
+                    <li><strong>Feasting:</strong> Communities gather to share meals, strengthening social bonds during the cold
+                        months.</li>
+                    <li><strong>Gift-Giving:</strong> Exchanging gifts symbolizes goodwill and sharing abundance.</li>
+                    <li><strong>Decorating with Evergreens:</strong> 
+                        Using evergreen plants like holly and mistletoe represents
+                        eternal life and protection.</li>
+                    <li><strong>Reflection and Renewal:</strong>
+                        <br> The solstice is a time for introspection, setting intentions
+                        for the coming year.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="hex-grid">
+            <div class="hex-row">
+                <div class="hex"><img src="assets/solstice/img-1.jpg"alt="Hex Image 1"></div>
+                <div class="hex"><img src="assets/solstice/img-2.jpg" alt="Hex Image 2"></div>
+                <div class="hex"><img src="assets/solstice/img-3.jpg" alt="Hex Image 3"></div>
+                <div class="hex"><img src="assets/solstice/img-4.jpg" alt="Hex Image 4"></div>
+                <div class="hex"><img src="assets/solstice/img-5.jpg" alt="Hex Image 5"></div>
+                <div class="hex"><img src="assets/solstice/img-6.jpg" alt="Hex Image 3"></div>
+                <div class="hex"><img src="assets/solstice/img-7.jpg" alt="Hex Image 4"></div>
+            </div>
+            <div class="hex-row">
+                <div class="hex"><img src="assets/solstice/img-8.jpg" alt="Hex Image 6"></div>
+                <div class="hex"><img src="assets/solstice/img-9.jpg" alt="Hex Image 7"></div>
+                <div class="hex"><img src="assets/solstice/img-10.jpg" alt="Hex Image 8"></div>
+                <div class="hex"><img src="assets/solstice/img-11.jpg" alt="Hex Image 9"></div>
+                <div class="hex"><img src="assets/solstice/img-12.jpg" alt="Hex Image 10"></div>
+                <div class="hex"><img src="assets/solstice/img-13.jpg" alt="Hex Image 8"></div>
+                <div class="hex"><img src="assets/solstice/img-14.jpg" alt="Hex Image 9"></div>
+            </div>
+        </div>
         
     </section>
+    
 
     <section id="winter">
         <div class="breathe-animation">

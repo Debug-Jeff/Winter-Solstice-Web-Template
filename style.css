@@ -295,15 +295,15 @@ section {
   align-items: center;
   justify-content: center;
   background-color: var(--tertiary-color);
-  height: 50vh;
+  height: 30vh;
   width: 100%;
   z-index: 100;
 }
 
 .breathe-animation span {
   font-family: 'TheFont';
-  font-size: clamp(10vw, 15vw, 50vh);
-  color: rgb(255, 255, 255);
+  font-size: clamp(5vw, 10vw, 30vh);
+  color: rgb(0, 208, 255);
   text-align: center; 
   animation: letter-breathe 3s ease-in-out infinite;
 }
@@ -450,77 +450,362 @@ body.loaded .image-content {
 
 /*=====================================================*/
 #celebrations {
-  padding-top: 200px;
-  padding-right: 40px;
-  padding-left: 40px;
-  height: 100vh;
+  padding: 40px 20px 40px 20px;
+  min-height: 100vh;
   background-color: var(--sd-color);
-}
-/*=====================================================*/
-#traditions {
-  padding-top: 200px;
-  padding-right: 40px;
-  padding-left: 40px;
-  height: 100vh;
-  width: 100%;
-  background-color: var(--sd-color);
-}
-/*
-#photo-grid {
-	display: grid;
-	grid-template-rows: 80px 1fr 80px;
-	grid-template-columns: 20% 1fr 20% 1fr;
-	gap: 5px;
-	width: 100%;
-	height: 50vh;
 }
 
-img {
+h2 {
+  margin-left: 20px;
+  font-size: 40px;
+}
+
+.parent {
+  left: 0;
+  margin: 10px 0 10px 40px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  min-height: 150px;
+  max-width: 800px;
+  transition: transform 0.15s ease-in-out; 
+  overflow: visible;
+}
+
+.box {
+  width: 20px;
+  height: 120px; 
+  background-color:var(--primary-color);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  transition: width 0.3s ease-in-out, transform 0.15s ease-in-out;
+  border-radius: 30px;
+}
+
+.box:hover {
+  width: 50px; /* Increase width on hover */
+  border: solid var(--clr-2);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.hover-text {
+  position: absolute;
+  writing-mode: vertical-rl; /* Makes the text appear vertically */
+  text-orientation: upright; /* Keeps the text upright */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.box:hover .hover-text {
+  opacity: 1; /* Reveal the text on hover */
+}
+
+.nr-text {
+  margin-left: 10px; /* Space between the box and text */
+  font-size: 1rem;
+  transition: transform 0.15s ease-in-out;
+}
+.iy-text {
+  margin-left: 10px; /* Space between the box and text */
+  font-size: 1rem;
+  transition: transform 0.15s ease-in-out;
+}
+.mn-text {
+  margin-left: 10px; /* Space between the box and text */
+  font-size: 1rem;
+  transition: transform 0.15s ease-in-out;
+}
+.kd-text {
+  margin-left: 10px; /* Space between the box and text */
+  font-size: 1rem;
+  transition: transform 0.15s ease-in-out;
+}
+
+/* Subtle scale on parent hover */
+.parent:hover {
+  transform: scale(1.05); /* Small increase in size */
+}
+
+/* The "easter egg" hover behavior for the box */
+.parent:hover .box {
+  transform: scale(1); /* Prevent additional scaling of the box when parent is hovered */
+}
+
+/* Modal Background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Black with opacity */
+  overflow: hidden; /* Prevent scrolling outside modal */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Modal Background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Black with opacity */
+  overflow: hidden; /* Prevent scrolling outside modal */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: rgba(160, 160, 160, 0.655);
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  width: 90%; /* Adjust width */
+  min-width: 800px; /* Minimum width for modal */
+  position: relative;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent line breaks in the gallery */
+  height: 80%; /* Adjust height for grid */
+}
+
+/* Close Button */
+.close-btn {
+  color: var(--tx-color);
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  cursor: pointer;
+}
+
+/* Gallery Styles */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Grid layout */
+  gap: 5px;
+  padding: 2px;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  height: 100%; /* Full height for gallery */
+}
+
+.gallery-item {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item img {
+  border-radius: 2px;
+  object-fit: cover; /* Ensures image fits its container */
+  transition: transform 0.3s ease-in-out;
+  height: 100px;
+  width: 100px;
+}
+
+/* Hover effect for images */
+.gallery-item:hover img {
+  transform: scale(1.1); /* Slightly enlarge the image */
+}
+
+
+
+
+
+
+
+
+
+
+/*=====================================================*/
+/* Section Styles */
+#traditions {
+  padding: 20px;
+  min-height: 100vh;
+  max-width: 100%;
+  background: linear-gradient(to bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0.526));
+}
+
+/* Content Layout */
+.traditions-content {
+  padding-top: 0;
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
+  justify-content: space-around;
+  color: var(--tx-color);
+  height: 50vh; /* Take up the first half of the page */
+}
+
+.td-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 5px;
+}
+
+/* Box Element */
+.td-box {
+  width: 20px;
+  height: 60%;
+  background-color: chartreuse;
+  transition: width 0.3s ease-in-out, transform 0.15s ease-in-out;
+}
+
+/* Title Styles */
+.td-title h2 {
+  margin-right: 20px;
+  text-align: right;
+  position: relative;
+  padding: 5px;
+  overflow: hidden;
+  font-size: 2rem;
+  transition: color 0.6s ease-in-out;
+}
+
+.td-title h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s ease-in-out;
+}
+
+.td-title h2:hover::before {
+  transform: scaleX(1);
+}
+
+.td-title h2:hover {
+  color: rgb(0, 225, 255); 
+}
+
+
+/* Content Styles */
+.td-content ul {
+  list-style-type: none;
+  padding-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  /*grid-gap: 10px;*/
+  margin: 10px;
+  height: 30vh; /* Height for content */
+  width: 100%;
+}
+
+.td-content li {
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 5px;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.td-content li:hover {
+  transform: translateY(-5px);
+}
+
+/* Center the last list item */
+.td-content li:nth-child(5) {
+  grid-column: span 2; /* Make it span both columns */
+  text-align: left;
+}
+
+
+.hex-grid-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.hex-grid {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 1px;
+}
+
+.hex-row {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.hex-row:first-child {
+  margin-left: 0;
+  margin-right: 2px;
+  top: 1px;
+}
+
+.hex-row:nth-child(2) {
+  margin-top: 55px;
+  position: relative;
+  margin-left: -103px;
+  transform: translateY(-50%);
+  top: 5px;
+}
+
+.hex {
+  position: relative;
+  width: 200px;
+  height: 230px; /* Perfect hexagon height */
+  clip-path: polygon(
+      50% 0%,
+      100% 25%,
+      100% 75%,
+      50% 100%,
+      0% 75%,
+      0% 25%
+  );
+  overflow: hidden;
+  margin: 4px;
+  background: rgb(255, 0, 0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.hex:hover {
+  transform: scale(1.1);
+}
+
+.hex img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.9);
 }
 
-#img-1 {
-	grid-area: 1 / 1 / 2 / 4;
-	background-color: rgba(107, 255, 77, 0.5);
+.hex:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
+  mix-blend-mode: multiply;
 }
-#img-2 {
-	grid-area: 2 / 1 / 3 / 2;
-	background-color: rgba(110, 1, 31, 0.5);
-}
-#img-3 {
-	grid-area: 2 / 2 / 3 / 3;
-	background-color: rgba(129, 192, 218, 0.5);
-}
-#img-4 {
-	grid-area: 2 / 3 / 3 / 4;
-	background-color: rgba(205, 191, 153, 0.5);
-}
-#img-5 {
-	grid-area: 3 / 1 / 4 / 4;
-	background-color: rgba(16, 110, 184, 0.5);
-}
-#img-6 {
-	grid-area: 2 / 2 / 3 / 3;
-	background-color: rgba(197,56,62, 0.5);
-}
-#img-7 {
-	grid-area: 2/4/3/5;
-	background-color: rgba(82,11,43, 0.5);
-}
-#img-8 {
-	grid-area: 3/4/4/5;
-	background-color: rgba(202,223,112, 0.5);
-}
-#img-9 {
-	grid-area: 1/4/2/5;
-	background-color: rgba(65,231,58, 0.5);
-}
-#img-10 {
-	grid-area: 1/4/2/5;
-	background-color: rgba(65,231,58, 0.5);
-}*/
 
 
 /*=====================================================*/
