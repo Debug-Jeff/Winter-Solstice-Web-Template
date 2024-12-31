@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
 
 :root {
-  --primary-color:#64E1F3;
+  --primary-color:#64e1f3;
   --secondary-color: #01588D;
   --tertiary-color:#003554;
   --tx-color:whitesmoke;
@@ -14,6 +14,12 @@
   --clr-3: #ffc640;
   --clr-4: #e54cff;
   --blur: 1rem;
+  --arm-count: 6;
+  --arm-base-angle: calc(360deg / var(--arm-count));
+  --sub-arm-angle-1: -45deg;
+  --sub-arm-angle-2: 45deg;
+  --mini-arm-angle: 60deg;
+  --mini-arm-alternate-angle: -56deg;
 }
 
 * {
@@ -634,12 +640,13 @@ h2 {
   padding: 20px;
   min-height: 100vh;
   max-width: 100%;
-  background: linear-gradient(to bottom, rgb(0, 0, 0), rgba(255, 255, 255, 0.526));
+  background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(61, 61, 61),rgba(255, 255, 255, 0.548));
 }
 
 /* Content Layout */
 .traditions-content {
-  padding-top: 0;
+  position: relative;
+  top: 80px;
   display: flex;
   flex-direction: row;
   /*align-items: center;*/
@@ -657,6 +664,8 @@ h2 {
 
 /* Box Element */
 .td-box {
+  position: relative;
+  top: 20px;
   width: 20px;
   height: 60%;
   background-color: chartreuse;
@@ -739,11 +748,12 @@ h2 {
 }
 
 .hex-grid {
+  top: 100px;
   position: relative;
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 1px;
 }
 
@@ -762,7 +772,15 @@ h2 {
 .hex-row:nth-child(2) {
   margin-top: 55px;
   position: relative;
-  margin-left: -103px;
+  margin-left: -206px;
+  transform: translateY(-50%);
+  top: 5px;
+}
+
+.hex-row:nth-child(3) {
+  margin-top: -55px;
+  position: relative;
+  margin-left: 0;
   transform: translateY(-50%);
   top: 5px;
 }
@@ -810,21 +828,301 @@ h2 {
 
 /*=====================================================*/
 #conclusion {
-  text-align: center;
   padding: 20px;
-  height: 60vh;
-  background-image: url(assets/img-11.jpg);
+  min-height: 100vh;
+  background-image: url(assets/img-14.jpg);
   background-position: center;
   background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+#conclusion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-position: inherit;
+  background-size: inherit;
+  filter: blur(8px);
+  z-index: 0;
+  opacity: 0.3;
 }
 
 #conclusion h2 {
+  display: flex;
+  justify-content: flex-end;
   color: var(--clr-1);
 }
 
-#conclusion p {
-  font-weight: 600;
+.snowflake-container {
+  width: 720px;
+  height: 720px;
+  position: relative;
+  margin: 0 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(90deg);
 }
+
+.center {
+  margin-top: 22px;
+  margin-left: 3px;
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.5));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  position: absolute;
+  z-index: 2;
+}
+
+.arm {
+  width: 240px;
+  height: 18px;
+  background: linear-gradient(to right, rgba(173, 216, 230, 0.8), rgba(255, 255, 255, 0.9));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: left center;
+}
+
+.arm:nth-child(1) { transform: rotate(calc(var(--arm-base-angle) * 0)); }
+.arm:nth-child(2) { transform: rotate(calc(var(--arm-base-angle) * 1)); }
+.arm:nth-child(3) { transform: rotate(calc(var(--arm-base-angle) * 2)); }
+.arm:nth-child(4) { transform: rotate(calc(var(--arm-base-angle) * 3)); }
+.arm:nth-child(5) { transform: rotate(calc(var(--arm-base-angle) * 4)); }
+.arm:nth-child(6) { transform: rotate(calc(var(--arm-base-angle) * 5)); }
+
+.sub-arm {
+  width: 72px;
+  height: 6px;
+  background: linear-gradient(to right, rgba(173, 216, 230, 0.7), rgba(255, 255, 255, 0.8));
+  position: absolute;
+  top: 50%;
+  transform-origin: left center;
+  left: 90px;
+}
+
+.sub-arm:nth-of-type(1) { transform: rotate(var(--sub-arm-angle-1)); }
+.sub-arm:nth-of-type(2) { transform: rotate(var(--sub-arm-angle-2)); }
+
+.mini-arm {
+  width: 36px;
+  height: 3px;
+  background: linear-gradient(to right, rgba(173, 216, 230, 0.6), rgba(255, 255, 255, 0.7));
+  position: absolute;
+  transform-origin: left center;
+}
+
+.mini-arm:nth-child(odd) { transform: rotate(var(--mini-arm-angle)); }
+.mini-arm:nth-child(even) { transform: rotate(var(--mini-arm-alternate-angle)); }
+
+
+
+.circle-wrapper {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: -75px;
+  top: -66px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  z-index: 100;
+}
+
+.image-circle {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.circle-wrapper:hover .image-circle {
+  transform: rotateY(180deg) scale(1.6);
+}
+
+.circle-front,
+.circle-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+.circle-front {
+  background: rgba(130, 222, 253, 0.9);
+}
+
+.circle-front img,
+.circle-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.circle-back {
+  transform: rotateY(180deg);
+  position: relative;
+}
+
+.circle-back img {
+  position: absolute;
+  filter: blur(8px) brightness(0.7);
+  transform-origin: center;
+}
+
+.circle-content {
+  position: relative;
+  z-index: 1;
+  padding: 25px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  color: white;
+  font-size: 13px;
+  transform-origin: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  box-sizing: border-box;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.arm:nth-child(1) .circle-content,
+.arm:nth-child(1) .circle-front img,
+.arm:nth-child(1) .circle-back img { transform: rotate(-90deg); }
+
+.arm:nth-child(2) .circle-content,
+.arm:nth-child(2) .circle-front img,
+.arm:nth-child(2) .circle-back img { transform: rotate(-150deg); }
+
+.arm:nth-child(3) .circle-content,
+.arm:nth-child(3) .circle-front img,
+.arm:nth-child(3) .circle-back img { transform: rotate(-210deg); }
+
+.arm:nth-child(4) .circle-content,
+.arm:nth-child(4) .circle-front img,
+.arm:nth-child(4) .circle-back img { transform: rotate(-270deg); }
+
+.arm:nth-child(5) .circle-content,
+.arm:nth-child(5) .circle-front img,
+.arm:nth-child(5) .circle-back img { transform: rotate(-330deg); }
+
+.arm:nth-child(6) .circle-content,
+.arm:nth-child(6) .circle-front img,
+.arm:nth-child(6) .circle-back img { transform: rotate(-30deg); }
+
+#winter-ln .breathe-animation {
+  height: 30vh;
+  width: 100%;
+  z-index: -100;
+}
+
+.snow-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snow-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2));
+  animation: snowfall 10s linear infinite;
+  filter: blur(3px);
+}
+
+/* Shaking animation for the title */
+.shaking-title {
+  animation: shake 5s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes snowfall {
+  0% {
+      transform: translateY(-100%);
+      opacity: 0;
+  }
+  10% {
+      opacity: 1;
+  }
+  90% {
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(100%);
+      opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  1% {
+      transform: translateX(-1px) translateY(-1px);
+  }
+  2% {
+      transform: translateX(1px) translateY(1px);
+  }
+  3% {
+      transform: translateX(-1px) translateY(0);
+  }
+  4% {
+      transform: translateX(1px) translateY(-1px);
+  }
+  5% {
+      transform: translateX(0) translateY(0);
+  }
+}
+
+/* Update the background blur */
+#conclusion {
+  position: relative;
+  overflow: hidden;
+}
+
+#conclusion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-position: inherit;
+  background-size: inherit;
+  filter: blur(8px);
+  z-index: 0;
+  opacity: 0.3;
+}
+
+
 /*=====================================================*/
 #main-footer {
   padding: 30px;
