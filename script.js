@@ -166,6 +166,7 @@ window.addEventListener('click', (event) => {
     }
 });
 
+//SNOW-FLAKE {SIX-SIDED}
 // Array of image paths - replace with your local image paths
 const imagePaths = [
   'assets/img-11.jpg',
@@ -260,18 +261,19 @@ function createSnowflake() {
 
 document.addEventListener('DOMContentLoaded', createSnowflake);
 
-// Add snow particle creation
+// Add snow particle creation with snowflakes that have more distinct size and opacity.
 function createSnowParticles() {
   const snowWrapper = document.querySelector('.snow-wrapper');
   for (let i = 0; i < 50; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'snow-particle';
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.animationDelay = `${Math.random() * 5}s`;
-      particle.style.opacity = Math.random();
-      snowWrapper.appendChild(particle);
+    const particle = document.createElement('div');
+    particle.className = 'snow-particle';
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 5}s`;
+    particle.style.opacity = Math.random();
+    snowWrapper.appendChild(particle);
   }
 }
+
 
 // Update the document ready function
 document.addEventListener('DOMContentLoaded', () => {
@@ -432,3 +434,71 @@ function rotateByVector(out, a, v, origin, s) {
     out[1] = origin[1] + (y * rx + x * ry) * s;
     return out;
 }
+
+//SNOW FLAKES - CONTENT_BREAK
+const flakesCount = 1000;
+const winterContainer = document.getElementById('snow');
+
+if (winterContainer) {
+    for (let i = 0; i < flakesCount; i++) {
+    const flakes = document.createElement('div');
+    flakes.className = 'flakes';
+    flakes.innerText = '*';
+
+    const initialRotation = Math.random() * 360;
+    flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
+    flakes.style.animationDuration = 5 + Math.random() * 5 + 's';
+    flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
+    flakes.style.transform = `rotate(${initialRotation}deg)`;
+
+    winterContainer.appendChild(flakes);
+
+    // Remove flakes when animation ends
+    flakes.addEventListener('animationend', () => {
+        flakes.remove();
+    });
+    
+    // Continuous snowfall
+    setInterval(() => {
+        const flakes = document.createElement('div');
+        flakes.className = 'flakes';
+        flakes.innerText = '*';
+
+        const initialRotation = Math.random() * 360;
+        flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
+        flakes.style.animationDuration = 6 + Math.random() * 5 + 's';
+        flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
+        flakes.style.transform = `rotate(${initialRotation}deg)`;
+
+        winterContainer.appendChild(flakes);
+
+        // Remove flakes when animation ends
+        flakes.addEventListener('animationend', () => {
+            flakes.remove();
+        });
+    }, 600);
+}
+}
+
+// Continuous snowfall
+setInterval(() => {
+    const flakes = document.createElement('div');
+    flakes.className = 'flakes';
+    flakes.innerText = '*';
+
+    const initialRotation = Math.random() * 360;
+    flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
+    flakes.style.animationDuration = 6 + Math.random() * 5 + 's';
+    flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
+    flakes.style.transform = `rotate(${initialRotation}deg)`;
+
+    winterContainer.appendChild(flakes);
+
+    // Remove flakes when animation ends
+    flakes.addEventListener('animationend', () => {
+        flakes.remove();
+    });
+}, 600);
+
+//SNOW-BALL EFFECT
+

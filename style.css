@@ -435,6 +435,96 @@ body.loaded .image-content {
 }
 
 /*=====================================================*/
+/*
+#snowflakes-ball {
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 50vh;
+	background-color: hsl(210, 60%, 15%);
+}
+
+#snowball {
+	clip-path: circle(50%);
+	width: 200px;
+	height: 200px;
+}
+
+.snowflake-area {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	position: relative;
+	background: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.05) 60%,
+		rgba(255, 255, 255, 0.2) 80%
+	);
+}
+*/
+/* Highlights *//*
+.snowflake-area::before {
+	content: "";
+	filter: blur(1px);
+	position: absolute;
+	width: 50%;
+	height: 30%;
+	top: 2%;
+	left: 25%;
+	border-radius: 50%;
+	background-image: linear-gradient(
+		to bottom,
+		rgba(255, 255, 255, 0.15),
+		rgba(255, 255, 255, 0)
+	);
+}
+/*
+/* Reflections *//*
+.snowflake-area::after {
+	content: "";
+	border-radius: 30%;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	z-index: -1;
+	bottom: -100px;
+	left: 0px;
+	transform: perspective(150px) rotatex(80deg);
+	filter: blur(20px);
+	background: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.3) 10%,
+		hsla(210, 60%, 30%, 0.8) 25%,
+		rgba(255, 255, 255, 0.8) 40%
+	);
+}
+
+button {
+	margin-top: 100px;
+	background-color: hsla(210, 60%, 100%, 0);
+	border: 1px solid hsla(210, 60%, 100%, 0.3);
+	color: hsla(210, 60%, 100%, 0.5);
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 0.6em;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: 1s;
+}
+
+button:hover {
+	border: 1px solid hsla(210, 60%, 100%, 0.6);
+	color: hsla(210, 60%, 100%, 0.8);
+}
+*/
+
+/*=====================================================*/
 #hemispheres{
   height: 100vh;
   background-image: url(assets/img-8.jpg);
@@ -444,7 +534,7 @@ body.loaded .image-content {
 }
 
 .hem-content {
-  padding-top: 200px;
+  padding-top: 70px;
   padding-right: 40px;
   padding-left: 40px;
   height: 70vh;
@@ -453,6 +543,73 @@ body.loaded .image-content {
   border-bottom-left-radius: 100px; /* Top-left corner radius */
   border-bottom-right-radius: 100px;;
 }
+
+.hem-content h2 {
+  margin: 0;
+}
+
+/*=====================================================*/
+
+#winter-snow {
+	margin: 0;
+	padding: 0;
+	background-image: linear-gradient(to bottom, #00111a, #00334d, #005580);
+	background: url("https://hagall-media.de/cp/forest3.jpg") repeat-x;
+	background-position: center bottom;
+	background-size: cover;
+	overflow: hidden;
+	height: 30vh;
+	width: 100vw;
+	position: relative;
+}
+
+canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#snow-canvas-1 {
+	z-index: 6;
+}
+#snow-canvas-2 {
+	z-index: 5;
+}
+#snow-canvas-3 {
+	z-index: 4;
+}
+#snow-canvas-4 {
+	z-index: 3;
+}
+#snow-canvas-5 {
+	z-index: 2;
+}
+#snow-canvas-6 {
+	z-index: 1;
+}
+
+.clouds-bg {
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	background: url("https://hagall-media.de/cp/clouds.png") repeat-x;
+	background-size: cover;
+	animation: moveClouds 200s linear infinite;
+	backdrop-filter: saturate(200%);
+	mix-blend-mode: plus-lighter;
+}
+
+@keyframes moveClouds {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -2000px 0;
+	}
+}
+
 
 /*=====================================================*/
 #celebrations {
@@ -625,14 +782,35 @@ h2 {
   transform: scale(1.1); /* Slightly enlarge the image */
 }
 
+/*=====================================================*/
+/* Styling for the winter animation */
+#snow {
+  margin: 0;
+  overflow: hidden;
+  height: 30vh;
+  background-image: url(assets/img-10.jpg);
+  background-position: center;
+  background-size: cover;
+  font-family: sans-serif;
+  position: relative;
+}
 
+/* Styling for snowflakes */
+.flakes {
+  position: absolute;
+  top: -20px;
+  color: white;
+  user-select: none;
+  animation: fall linear infinite;
+}
 
-
-
-
-
-
-
+/* Keyframes for falling snowflakes */
+@keyframes fall {
+  to {
+      transform: translateY(30vh) rotate(360deg) translateX(20px);
+      opacity: 0;
+  }
+}
 
 /*=====================================================*/
 /* Section Styles */
@@ -835,6 +1013,9 @@ h2 {
   background-size: cover;
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #conclusion::before {
@@ -847,22 +1028,27 @@ h2 {
   background-image: inherit;
   background-position: inherit;
   background-size: inherit;
-  filter: blur(8px);
+  filter: blur(4px); /* Reduced the blur */
   z-index: 0;
   opacity: 0.3;
 }
 
 #conclusion h2 {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   color: var(--clr-1);
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5rem; /* Updated font size */
+  font-weight: bold;
+  animation: shake 2s ease-in-out infinite; /* Shaking effect */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .snowflake-container {
   width: 720px;
   height: 720px;
   position: relative;
-  margin: 0 50px;
+  margin: 0 50px; /*POSSIBLE-DEL*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -922,7 +1108,6 @@ h2 {
 .mini-arm:nth-child(even) { transform: rotate(var(--mini-arm-alternate-angle)); }
 
 
-
 .circle-wrapper {
   width: 150px;
   height: 150px;
@@ -980,7 +1165,7 @@ h2 {
 
 .circle-back img {
   position: absolute;
-  filter: blur(8px) brightness(0.7);
+  filter: blur(4px) brightness(0.7); /* REDUCED BLUR ON BACK */
   transform-origin: center;
 }
 
@@ -1052,7 +1237,7 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2));
+  background: transparent;
   animation: snowfall 10s linear infinite;
   filter: blur(3px);
 }
@@ -1124,22 +1309,69 @@ h2 {
 
 
 /*=====================================================*/
+/* General Footer Styling */
 #main-footer {
-  padding: 30px;
-  background-color: #333;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  bottom: 0;
+  background: #151414;
+  color: #878787;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
 #main-footer p {
-  color: #7a1717;
-  font-weight: 400;
+  margin: 0;
+  font-size: 14px;
 }
 
 #main-footer a {
-  color: #fff;
+  color: #ff5e14;
   text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+#main-footer a:hover {
+  color: #ff934f;
+}
+
+/* Footer Navigation */
+#footer-nav ul {
   list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+#footer-nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+#footer-nav ul li a:hover {
+  color: #ff5e14;
+}
+
+/* Easter Egg Styling */
+.easter-egg {
+  display: none;
+  background: #2E2E2E;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+#main-footer:hover .easter-egg {
+  display: block;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
