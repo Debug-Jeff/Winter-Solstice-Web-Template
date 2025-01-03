@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Optional: For contrast */
+}
+
+#wave-divider {
+    height: 35vh; /* Section height */
+    width: 100%;
+    position: relative; /* Ensure waves are scoped to this section */
+    overflow: hidden; /* Prevent waves from spilling out */
+    background-color: #000000; /* Section background color */
+}
+
+.editorial {
+    position: absolute;
+    bottom: 0; /* Align waves to the bottom of the section */
+    width: 100%;
+    height: 60px; /* Reduced height for smaller waves */
+    max-height: 60px; /* Ensure waves stay small */
+}
+
+.parallax1 > use {
+    animation: move-forever1 10s linear infinite;
+}
+
+.parallax2 > use {
+    animation: move-forever2 8s linear infinite;
+}
+
+.parallax3 > use {
+    animation: move-forever3 6s linear infinite;
+}
+
+.parallax4 > use {
+    animation: move-forever4 4s linear infinite;
+}
+
+@keyframes move-forever1 {
+    0% {
+        transform: translate(85px, 0%);
+    }
+
+    100% {
+        transform: translate(-90px, 0%);
+    }
+}
+
+@keyframes move-forever2 {
+    0% {
+        transform: translate(-90px, 0%);
+    }
+
+    100% {
+        transform: translate(85px, 0%);
+    }
+}
+
+@keyframes move-forever3 {
+    0% {
+        transform: translate(85px, 0%);
+    }
+
+    100% {
+        transform: translate(-90px, 0%);
+    }
+}
+
+@keyframes move-forever4 {
+    0% {
+        transform: translate(-90px, 0%);
+    }
+
+    100% {
+        transform: translate(85px, 0%);
+    }
+}
