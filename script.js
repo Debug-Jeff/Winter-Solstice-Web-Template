@@ -4,52 +4,39 @@ const nav = document.querySelector("#main-nav");
 let previousScrollPosition = 0;
 
 const isScrollingDown = () => {
-  let scrolledPosition = supportPageOffset
-    ? window.pageYOffset
-    : isCSS1Compat
-    ? document.documentElement.scrollTop
-    : document.body.scrollTop;
-  let isScrollDown;
-
-  if (scrolledPosition > previousScrollPosition) {
-    isScrollDown = true;
-  } else {
-    isScrollDown = false;
-  }
-  previousScrollPosition = scrolledPosition;
-  return isScrollDown;
+    let scrolledPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    const isScrollDown = scrolledPosition > previousScrollPosition;
+    previousScrollPosition = scrolledPosition;
+    return isScrollDown;
 };
 
 const handleNavScroll = () => {
-  if (isScrollingDown() && !nav.contains(document.activeElement)) {
-    nav.classList.add("scroll-down");
-    nav.classList.remove("scroll-up");
-  } else {
-    nav.classList.add("scroll-up");
-    nav.classList.remove("scroll-down");
-  }
+    if (isScrollingDown() && !nav.contains(document.activeElement)) {
+        nav.classList.add("scroll-down");
+        nav.classList.remove("scroll-up");
+    } else {
+        nav.classList.add("scroll-up");
+        nav.classList.remove("scroll-down");
+    }
 };
-
-var throttleTimer;
 
 const throttle = (callback, time) => {
-  if (throttleTimer) return;
-
-  throttleTimer = true;
-  setTimeout(() => {
-    callback();
-    throttleTimer = false;
-  }, time);
+    let throttleTimer;
+    return () => {
+        if (throttleTimer) return;
+        throttleTimer = setTimeout(() => {
+            callback();
+            throttleTimer = null;
+        }, time);
+    };
 };
 
-window.addEventListener("scroll", () => {
-  if (mediaQuery && !mediaQuery.matches) {
-    throttle(handleNavScroll, 250);
-  }
-});
+window.addEventListener("scroll", throttle(handleNavScroll, 250));
 
 window.addEventListener('load', () => {
-  document.body.classList.add('loaded');
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 0);
 });
 
 /*====================MODAL FUNCTIONALITY====================*/
@@ -58,15 +45,13 @@ const modalGallery = document.getElementById('modal-gallery');
 const closeBtn = document.querySelector('.close-btn');
 const boxElements = document.querySelectorAll('.box');
 
-// Gallery style configuration
 const modalStyles = {
-    newgrange: 'grid-gallery',     // Design 1
-    intiraymi: 'flex-gallery',     // Design 2
-    modranicht: 'grid-gallery',    // Design 1
-    koliada: 'flex-gallery'        // Design 2
+    newgrange: 'grid-gallery',
+    intiraymi: 'flex-gallery',
+    modranicht: 'grid-gallery',
+    koliada: 'flex-gallery'
 };
 
-// Image arrays (replace with your actual image URLs)
 const images = {
     newgrange: [
         'assets/Celebrations/Newgrange/img-300.jfif',
@@ -103,7 +88,6 @@ const images = {
         'assets/Celebrations/Modranicht/img-407.jfif',
         'assets/Celebrations/Modranicht/img-408.jfif',
         'assets/Celebrations/Modranicht/img-409.jfif'
-
     ],
     koliada: [
         'assets/Celebrations/Koliada/img-100.jfif',
@@ -119,16 +103,14 @@ const images = {
     ]
 };
 
-// Event handler for box clicks
-boxElements.forEach(box => {
-    box.addEventListener('click', () => {
-        const celebration = box.getAttribute('data-celebration');
+const openModal = (celebration) => {
+    setTimeout(() => {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
 
         modalGallery.innerHTML = '';
         const selectedImages = images[celebration];
-        
+
         if (modalStyles[celebration] === 'grid-gallery') {
             modalGallery.className = 'grid-gallery';
             selectedImages.slice(0, 9).forEach(src => {
@@ -148,40 +130,44 @@ boxElements.forEach(box => {
                 modalGallery.appendChild(li);
             });
         }
-    });
+    }, 0);
+};
+
+boxElements.forEach(box => {
+    box.addEventListener('click', () => openModal(box.getAttribute('data-celebration')));
 });
 
-// Close modal events
 closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 0);
 });
 
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 0);
     }
 });
 
-
 /*====================PARTICLE ANIMATIONS====================*/
 function createSnowParticles() {
-  const snowWrapper = document.querySelector('.snow-wrapper');
-  for (let i = 0; i < 50; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'snow-particle';
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.animationDelay = `${Math.random() * 5}s`;
-    particle.style.opacity = Math.random();
-    snowWrapper.appendChild(particle);
-  }
+    const snowWrapper = document.querySelector('.snow-wrapper');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'snow-particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.opacity = Math.random();
+        snowWrapper.appendChild(particle);
+    }
 }
 
-// Update the document ready function
 document.addEventListener('DOMContentLoaded', () => {
-  createSnowflake();
-  createSnowParticles();
+    setTimeout(() => createSnowParticles(), 0);
 });
 
 /*====================MAIN LOOP AND CANVAS INITIALIZATION====================*/
@@ -192,33 +178,30 @@ let state;
 requestAnimationFrame(main);
 
 function main() {
-    const winterSection = document.getElementById('winter-ln'); // Target the #winter section
+    setTimeout(() => {
+        const winterSection = document.getElementById('winter-ln');
 
-    canvas = document.createElement('canvas');
-    winterSection.appendChild(canvas); // Append canvas to the section
-    winterSection.style.position = 'relative'; // Ensure section has relative positioning
-    canvas.style.position = 'absolute'; // Make canvas fill the section
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.zIndex = '-1'; // Place canvas behind other content
+        canvas = document.createElement('canvas');
+        winterSection.appendChild(canvas);
+        winterSection.style.position = 'relative';
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
 
-    canvasCtx = canvas.getContext('2d');
+        canvasCtx = canvas.getContext('2d');
 
-    checkResizeAndInit();
-    state = createState();
+        checkResizeAndInit();
+        state = createState();
 
-    requestAnimationFrame(mainLoop);
-
-    function mainLoop() {
-        tick();
         requestAnimationFrame(mainLoop);
-    }
+    }, 0);
 }
 
 function createState() {
-    const state = {
+    return {
         time: 0,
         timeDelta: 1 / 60,
         pointer: {
@@ -226,91 +209,94 @@ function createState() {
             vel: [640, 8],
         },
     };
-    return state;
 }
 
 function tick() {
-    checkResizeAndInit();
-    canvasCtx.fillStyle = `rgba(0, 0, 0, ${1 / 32})`;
-    canvasCtx.fillRect(0, 0, canvasSize[0], canvasSize[1]);
+    setTimeout(() => {
+        checkResizeAndInit();
+        canvasCtx.fillStyle = `rgba(0, 0, 0, ${1 / 32})`;
+        canvasCtx.fillRect(0, 0, canvasSize[0], canvasSize[1]);
 
-    doIt();
+        doIt();
 
-    state.time += state.timeDelta;
+        state.time += state.timeDelta;
+    }, 0);
 }
 
 function checkResizeAndInit() {
-    const rect = document.getElementById('winter-ln').getBoundingClientRect(); // Get #winter's dimensions
+    const rect = document.getElementById('winter-ln').getBoundingClientRect();
     if (rect.width === canvasSize[0] && rect.height === canvasSize[1]) return;
     canvasSize[0] = canvas.width = rect.width;
     canvasSize[1] = canvas.height = rect.height;
 }
 
 function doIt() {
-    const { pointer, timeDelta } = state;
+    setTimeout(() => {
+        const { pointer, timeDelta } = state;
 
-    const oldPos = [pointer.pos[0], pointer.pos[1]];
+        const oldPos = [pointer.pos[0], pointer.pos[1]];
 
-    let x = pointer.pos[0] - canvasSize[0] / 2;
-    let y = pointer.pos[1] - canvasSize[1] / 2;
+        let x = pointer.pos[0] - canvasSize[0] / 2;
+        let y = pointer.pos[1] - canvasSize[1] / 2;
 
-    const l = Math.hypot(x, y);
-    const m = (1 / l) * 40000000 / Math.max(32, l) ** 2;
-    pointer.vel[0] -= x * m * timeDelta;
-    pointer.vel[1] -= y * m * timeDelta;
-    pointer.vel[Math.random() < 0.5 ? 0 : 1] += 100 + (Math.random() * 2 - 1);
+        const l = Math.hypot(x, y);
+        const m = (1 / l) * 40000000 / Math.max(32, l) ** 2;
+        pointer.vel[0] -= x * m * timeDelta;
+        pointer.vel[1] -= y * m * timeDelta;
+        pointer.vel[Math.random() < 0.5 ? 0 : 1] += 100 + (Math.random() * 2 - 1);
 
-    const velLimit = 2048;
-    if (Math.hypot(pointer.vel[0], pointer.vel[1]) > velLimit) {
-        pointer.vel[0] *= 0.95;
-        pointer.vel[1] *= 0.95;
-    }
-    pointer.pos[0] += pointer.vel[0] * timeDelta;
-    pointer.pos[1] += pointer.vel[1] * timeDelta;
+        const velLimit = 2048;
+        if (Math.hypot(pointer.vel[0], pointer.vel[1]) > velLimit) {
+            pointer.vel[0] *= 0.95;
+            pointer.vel[1] *= 0.95;
+        }
+        pointer.pos[0] += pointer.vel[0] * timeDelta;
+        pointer.pos[1] += pointer.vel[1] * timeDelta;
 
-    const min = Math.min(canvasSize[0], canvasSize[1]);
-    const left = canvasSize[0] / 2 - min / 2;
-    const right = canvasSize[0] / 2 + min / 2;
-    const top = canvasSize[1] / 2 - min / 2;
-    const bottom = canvasSize[1] / 2 + min / 2;
+        const min = Math.min(canvasSize[0], canvasSize[1]);
+        const left = canvasSize[0] / 2 - min / 2;
+        const right = canvasSize[0] / 2 + min / 2;
+        const top = canvasSize[1] / 2 - min / 2;
+        const bottom = canvasSize[1] / 2 + min / 2;
 
-    if (pointer.pos[0] < left) {
-        pointer.pos[0] = left + (left - pointer.pos[0]);
-        pointer.vel[0] *= -1;
-    } else if (pointer.pos[0] > right) {
-        pointer.pos[0] = right - (pointer.pos[0] - right);
-        pointer.vel[0] *= -1;
-    }
+        if (pointer.pos[0] < left) {
+            pointer.pos[0] = left + (left - pointer.pos[0]);
+            pointer.vel[0] *= -1;
+        } else if (pointer.pos[0] > right) {
+            pointer.pos[0] = right - (pointer.pos[0] - right);
+            pointer.vel[0] *= -1;
+        }
 
-    if (pointer.pos[1] < top) {
-        pointer.pos[1] = top + (top - pointer.pos[1]);
-        pointer.vel[1] *= -1;
-    } else if (pointer.pos[1] > bottom) {
-        pointer.pos[1] = bottom - (pointer.pos[1] - bottom);
-        pointer.vel[1] *= -1;
-    }
+        if (pointer.pos[1] < top) {
+            pointer.pos[1] = top + (top - pointer.pos[1]);
+            pointer.vel[1] *= -1;
+        } else if (pointer.pos[1] > bottom) {
+            pointer.pos[1] = bottom - (pointer.pos[1] - bottom);
+            pointer.vel[1] *= -1;
+        }
 
-    const pos = [pointer.pos[0], pointer.pos[1]];
+        const pos = [pointer.pos[0], pointer.pos[1]];
 
-    canvasCtx.beginPath();
+        canvasCtx.beginPath();
 
-    const rVec = [0, 0];
-    const t = [0, 0];
-    const origin = [canvasSize[0] / 2, canvasSize[1] / 2];
-    const n = 15;
-    for (let i = 0; i < n; ++i) {
-        const a = (Math.PI / 180) * 55 * i;
-        const s = 0.2 + (0.8 / n) * i;
-        rVec[0] = Math.cos(a);
-        rVec[1] = Math.sin(a);
-        rotateByVector(t, oldPos, rVec, origin, s);
-        canvasCtx.moveTo(t[0], t[1]);
-        rotateByVector(t, pos, rVec, origin, s);
-        canvasCtx.lineTo(t[0], t[1]);
-    }
+        const rVec = [0, 0];
+        const t = [0, 0];
+        const origin = [canvasSize[0] / 2, canvasSize[1] / 2];
+        const n = 15;
+        for (let i = 0; i < n; ++i) {
+            const a = (Math.PI / 180) * 55 * i;
+            const s = 0.2 + (0.8 / n) * i;
+            rVec[0] = Math.cos(a);
+            rVec[1] = Math.sin(a);
+            rotateByVector(t, oldPos, rVec, origin, s);
+            canvasCtx.moveTo(t[0], t[1]);
+            rotateByVector(t, pos, rVec, origin, s);
+            canvasCtx.lineTo(t[0], t[1]);
+        }
 
-    canvasCtx.strokeStyle = '#64e1f3';
-    canvasCtx.stroke();
+        canvasCtx.strokeStyle = '#64e1f3';
+        canvasCtx.stroke();
+    }, 0);
 }
 
 function rotateByVector(out, a, v, origin, s) {
@@ -323,83 +309,50 @@ function rotateByVector(out, a, v, origin, s) {
     return out;
 }
 
-//SNOW FLAKES - CONTENT_BREAK
+// Continuous snowfall
 const flakesCount = 1000;
 const winterContainer = document.getElementById('snow');
 
 if (winterContainer) {
+    const createFlake = () => {
+        setTimeout(() => {
+            const flakes = document.createElement('div');
+            flakes.className = 'flakes';
+            flakes.innerText = '*';
+
+            const initialRotation = Math.random() * 360;
+            flakes.style.left = Math.random() * 100 + '%';
+            flakes.style.animationDuration = 6 + Math.random() * 5 + 's';
+            flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
+            flakes.style.transform = `rotate(${initialRotation}deg)`;
+
+            winterContainer.appendChild(flakes);
+
+            flakes.addEventListener('animationend', () => {
+                setTimeout(() => flakes.remove(), 0);
+            });
+        }, 0);
+    };
+
     for (let i = 0; i < flakesCount; i++) {
-    const flakes = document.createElement('div');
-    flakes.className = 'flakes';
-    flakes.innerText = '*';
+        createFlake();
+    }
 
-    const initialRotation = Math.random() * 360;
-    flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
-    flakes.style.animationDuration = 5 + Math.random() * 5 + 's';
-    flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
-    flakes.style.transform = `rotate(${initialRotation}deg)`;
-
-    winterContainer.appendChild(flakes);
-
-    // Remove flakes when animation ends
-    flakes.addEventListener('animationend', () => {
-        flakes.remove();
-    });
-    
-    // Continuous snowfall
-    setInterval(() => {
-        const flakes = document.createElement('div');
-        flakes.className = 'flakes';
-        flakes.innerText = '*';
-
-        const initialRotation = Math.random() * 360;
-        flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
-        flakes.style.animationDuration = 6 + Math.random() * 5 + 's';
-        flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
-        flakes.style.transform = `rotate(${initialRotation}deg)`;
-
-        winterContainer.appendChild(flakes);
-
-        // Remove flakes when animation ends
-        flakes.addEventListener('animationend', () => {
-            flakes.remove();
-        });
-    }, 600);
+    setInterval(() => createFlake(), 600);
 }
-}
-
-// Continuous snowfall
-setInterval(() => {
-    const flakes = document.createElement('div');
-    flakes.className = 'flakes';
-    flakes.innerText = '*';
-
-    const initialRotation = Math.random() * 360;
-    flakes.style.left = Math.random() * 100 + '%'; // Position within #winter width
-    flakes.style.animationDuration = 6 + Math.random() * 5 + 's';
-    flakes.style.fontSize = 8 + Math.random() * 10 + 'px';
-    flakes.style.transform = `rotate(${initialRotation}deg)`;
-
-    winterContainer.appendChild(flakes);
-
-    // Remove flakes when animation ends
-    flakes.addEventListener('animationend', () => {
-        flakes.remove();
-    });
-}, 600);
 
 // Falling-Snowflake effect
 function createSnowflakes() {
-  const header = document.getElementById('main-header');
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.style.left = Math.random() * 100 + 'vw';
-  snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-  header.appendChild(snowflake);
-  
-  setTimeout(() => snowflake.remove(), 5000);
+    setTimeout(() => {
+        const header = document.getElementById('main-header');
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        header.appendChild(snowflake);
+
+        setTimeout(() => snowflake.remove(), 5000);
+    }, 0);
 }
 
-setInterval(createSnowflakes, 500);
-
-
+setInterval(() => createSnowflakes(), 500);

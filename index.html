@@ -331,6 +331,12 @@
     </footer>
 
     <script src="script.js">
+    setTimeout(function() {
+        var script = document.createElement('script');
+        script.src = 'script.js';
+        document.body.appendChild(script);
+    }, 3000);
+
     </script>
 </body>
 
