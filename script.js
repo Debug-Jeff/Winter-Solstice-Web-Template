@@ -1,6 +1,5 @@
+/*====================NAVIGATION SCROLL====================*/
 const nav = document.querySelector("#main-nav");
-const supportPageOffset = window.pageXOffset !== undefined;
-const isCSS1Compat = (document.compatMode || "") === "CSS1Compat";
 
 let previousScrollPosition = 0;
 
@@ -43,8 +42,6 @@ const throttle = (callback, time) => {
   }, time);
 };
 
-const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 window.addEventListener("scroll", () => {
   if (mediaQuery && !mediaQuery.matches) {
     throttle(handleNavScroll, 250);
@@ -54,214 +51,121 @@ window.addEventListener("scroll", () => {
 window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 });
-// Get modal element
-const modal = document.getElementById('modal');
 
-// Get open modal buttons (boxes in your case)
+/*====================MODAL FUNCTIONALITY====================*/
+const modal = document.getElementById('modal');
+const modalGallery = document.getElementById('modal-gallery');
+const closeBtn = document.querySelector('.close-btn');
 const boxElements = document.querySelectorAll('.box');
 
-// Get close button
-const closeBtn = document.querySelector('.close-btn');
+// Gallery style configuration
+const modalStyles = {
+    newgrange: 'grid-gallery',     // Design 1
+    intiraymi: 'flex-gallery',     // Design 2
+    modranicht: 'grid-gallery',    // Design 1
+    koliada: 'flex-gallery'        // Design 2
+};
 
-// Get the modal gallery container
-const modalGallery = document.getElementById('modal-gallery');
-
-// Image sets for each celebration
+// Image arrays (replace with your actual image URLs)
 const images = {
     newgrange: [
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg', 'assets/img-11.jpg',
-        'assets/img-11.jpg', 'assets/img-11.jpg'
+        'assets/Celebrations/Newgrange/img-300.jfif',
+        'assets/Celebrations/Newgrange/img-301.jfif',
+        'assets/Celebrations/Newgrange/img-302.jfif',
+        'assets/Celebrations/Newgrange/img-303.jfif',
+        'assets/Celebrations/Newgrange/img-304.jfif',
+        'assets/Celebrations/Newgrange/img-305.jfif',
+        'assets/Celebrations/Newgrange/img-306.jfif',
+        'assets/Celebrations/Newgrange/img-307.jfif',
+        'assets/Celebrations/Newgrange/img-308.jfif',
+        'assets/Celebrations/Newgrange/img-309.jfif'
     ],
     intiraymi: [
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg', 'assets/img-12.jpg',
-        'assets/img-12.jpg', 'assets/img-12.jpg'
+        'assets/Celebrations/IntiRaymi/img-200.jfif',
+        'assets/Celebrations/IntiRaymi/img-201.jfif',
+        'assets/Celebrations/IntiRaymi/img-202.jfif',
+        'assets/Celebrations/IntiRaymi/img-204.jfif',
+        'assets/Celebrations/IntiRaymi/img-205.jfif',
+        'assets/Celebrations/IntiRaymi/img-206.jfif',
+        'assets/Celebrations/IntiRaymi/img-207.jfif',
+        'assets/Celebrations/IntiRaymi/img-208.jfif',
+        'assets/Celebrations/IntiRaymi/img-209.jfif',
+        'assets/Celebrations/IntiRaymi/img-210.jfif'
     ],
     modranicht: [
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg', 'assets/img-13.jpg',
-        'assets/img-13.jpg', 'assets/img-13.jpg'
+        'assets/Celebrations/Modranicht/img-400.jfif',
+        'assets/Celebrations/Modranicht/img-401.jfif',
+        'assets/Celebrations/Modranicht/img-402.jfif',
+        'assets/Celebrations/Modranicht/img-403.jfif',
+        'assets/Celebrations/Modranicht/img-404.jfif',
+        'assets/Celebrations/Modranicht/img-405.jfif',
+        'assets/Celebrations/Modranicht/img-406.jfif',
+        'assets/Celebrations/Modranicht/img-407.jfif',
+        'assets/Celebrations/Modranicht/img-408.jfif',
+        'assets/Celebrations/Modranicht/img-409.jfif'
+
     ],
     koliada: [
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg', 'assets/img-8.jpg',
-        'assets/img-8.jpg', 'assets/img-8.jpg'
+        'assets/Celebrations/Koliada/img-100.jfif',
+        'assets/Celebrations/Koliada/img-101.jfif',
+        'assets/Celebrations/Koliada/img-102.jfif',
+        'assets/Celebrations/Koliada/img-103.jfif',
+        'assets/Celebrations/Koliada/img-104.jfif',
+        'assets/Celebrations/Koliada/img-105.jfif',
+        'assets/Celebrations/Koliada/img-106.jfif',
+        'assets/Celebrations/Koliada/img-107.jfif',
+        'assets/Celebrations/Koliada/img-108.jfif',
+        'assets/Celebrations/Koliada/img-109.jfif'
     ]
 };
 
-// Add click event listener to each box to open modal with specific images
+// Event handler for box clicks
 boxElements.forEach(box => {
     box.addEventListener('click', () => {
         const celebration = box.getAttribute('data-celebration');
-        modal.style.display = 'block'; // Show modal
-        document.body.style.overflow = 'hidden'; // Disable body scroll
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
 
-        // Clear previous gallery items
         modalGallery.innerHTML = '';
-
-        // Get images for the selected celebration
         const selectedImages = images[celebration];
-
-        // Add images to the modal gallery
-        selectedImages.forEach(src => {
-            const imgElement = document.createElement('img');
-            imgElement.src = src;
-            imgElement.alt = 'Celebration Image';
-            const galleryItem = document.createElement('div');
-            galleryItem.classList.add('gallery-item');
-            galleryItem.appendChild(imgElement);
-            modalGallery.appendChild(galleryItem);
-        });
+        
+        if (modalStyles[celebration] === 'grid-gallery') {
+            modalGallery.className = 'grid-gallery';
+            selectedImages.slice(0, 9).forEach(src => {
+                const imgElement = document.createElement('img');
+                imgElement.src = src;
+                imgElement.alt = 'Celebration Image';
+                modalGallery.appendChild(imgElement);
+            });
+        } else {
+            modalGallery.className = 'flex-gallery';
+            selectedImages.slice(0, 7).forEach(src => {
+                const li = document.createElement('li');
+                const imgElement = document.createElement('img');
+                imgElement.src = src;
+                imgElement.alt = 'Celebration Image';
+                li.appendChild(imgElement);
+                modalGallery.appendChild(li);
+            });
+        }
     });
 });
 
-// Add click event listener to close button to close modal
+// Close modal events
 closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none'; // Hide modal
-    document.body.style.overflow = 'auto'; // Re-enable body scroll
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
 });
 
-// Close modal if clicked outside the modal content
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
-        modal.style.display = 'none'; // Hide modal if clicked outside
-        document.body.style.overflow = 'auto'; // Re-enable body scroll
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 });
 
-//SNOW-FLAKE {SIX-SIDED}
-// Array of image paths - replace with your local image paths
-const imagePaths = [
-  'assets/img-11.jpg',
-  'assets/img-10.jpg',
-  'assets/img-12.jpg',
-  'assets/img-13.jpg',
-  'assets/img-14.jpg',
-  'assets/img-1.jpg'
-];
 
-const sampleTexts = [
-  "The winter solstice is a profound event that connects humanity across time and space.",
-  "It marks the year's longest night and shortest day, a celestial turning point.",
-  "Despite differences in culture and climate, people around the world share similar themes.",
-  "Celebrations often emphasize hope, renewal, and the enduring human spirit amid darkness and cold.",
-  "Understanding the solstice's science deepens our appreciation of its traditions and cosmic connections.",
-  "This timeless event inspires awe, reflection, and unity across generations and global boundaries."
-];
-
-function createMiniArms(parentArm, startPosition, count) {
-  for (let i = 0; i < count; i++) {
-      const miniArm = document.createElement('div');
-      miniArm.className = i < count / 2 ? 'mini-arm' : 'tiny-arm';
-      miniArm.style.left = `${startPosition + (i * 15)}px`;
-      parentArm.appendChild(miniArm);
-  }
-}
-
-function createSnowflake() {
-  const armsContainer = document.getElementById('arms-container');
-  const numArms = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--arm-count'));
-
-  for (let i = 0; i < numArms; i++) {
-      const arm = document.createElement('div');
-      arm.className = 'arm';
-
-      const circleWrapper = document.createElement('div');
-      circleWrapper.className = 'circle-wrapper';
-
-      const imageCircle = document.createElement('div');
-      imageCircle.className = 'image-circle';
-
-      // Create front of circle
-      const circleFront = document.createElement('div');
-      circleFront.className = 'circle-front';
-      const frontImg = document.createElement('img');
-      frontImg.src = imagePaths[i];
-      frontImg.alt = `Circle ${i + 1} image`;
-      circleFront.appendChild(frontImg);
-
-      // Create back of circle with blurred image
-      const circleBack = document.createElement('div');
-      circleBack.className = 'circle-back';
-      
-      // Add blurred background image
-      const backImg = document.createElement('img');
-      backImg.src = imagePaths[i];
-      backImg.alt = `Circle ${i + 1} background`;
-      circleBack.appendChild(backImg);
-
-      // Add text content
-      const circleContent = document.createElement('div');
-      circleContent.className = 'circle-content';
-      circleContent.textContent = sampleTexts[i];
-      circleBack.appendChild(circleContent);
-
-      imageCircle.appendChild(circleFront);
-      imageCircle.appendChild(circleBack);
-      circleWrapper.appendChild(imageCircle);
-      arm.appendChild(circleWrapper);
-
-      // Create sub-arms
-      for (let j = 0; j < 2; j++) {
-          const subArm = document.createElement('div');
-          subArm.className = 'sub-arm';
-          createMiniArms(subArm, 30, 4);
-          arm.appendChild(subArm);
-      }
-
-      createMiniArms(arm, 60, 6);
-
-      // Create tiny decorative arms
-      for (let k = 0; k < 4; k++) {
-          const tinyArm = document.createElement('div');
-          tinyArm.className = 'tiny-arm';
-          arm.appendChild(tinyArm);
-      }
-
-      armsContainer.appendChild(arm);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', createSnowflake);
-
-// Add snow particle creation with snowflakes that have more distinct size and opacity.
+/*====================PARTICLE ANIMATIONS====================*/
 function createSnowParticles() {
   const snowWrapper = document.querySelector('.snow-wrapper');
   for (let i = 0; i < 50; i++) {
@@ -274,29 +178,13 @@ function createSnowParticles() {
   }
 }
 
-
 // Update the document ready function
 document.addEventListener('DOMContentLoaded', () => {
   createSnowflake();
   createSnowParticles();
 });
 
-// Add subtle movement to the background
-function moveBackground() {
-  const conclusion = document.getElementById('conclusion');
-  let offset = 0;
-  
-  setInterval(() => {
-      offset += 0.1;
-      conclusion.style.backgroundPosition = `${Math.sin(offset) * 10}px ${Math.cos(offset) * 10}px`;
-  }, 50);
-}
-
-// Initialize background movement
-document.addEventListener('DOMContentLoaded', moveBackground);
-
-console.clear();
-
+/*====================MAIN LOOP AND CANVAS INITIALIZATION====================*/
 let canvas, canvasCtx;
 let canvasSize = [0, 0];
 let state;
@@ -500,5 +388,18 @@ setInterval(() => {
     });
 }, 600);
 
-//SNOW-BALL EFFECT
+// Falling-Snowflake effect
+function createSnowflakes() {
+  const header = document.getElementById('main-header');
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+  snowflake.style.left = Math.random() * 100 + 'vw';
+  snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  header.appendChild(snowflake);
+  
+  setTimeout(() => snowflake.remove(), 5000);
+}
+
+setInterval(createSnowflakes, 500);
+
 
