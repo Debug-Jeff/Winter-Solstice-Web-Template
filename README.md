@@ -33,11 +33,7 @@ The final product features:
    - Each celebration section links to an image gallery.
    - Responsive layouts with grid and flex options.
 
-4. **Responsive Design**:
-   - Fully responsive across different screen sizes.
-   - Adaptations for mobile users, including optimized navigation.
-
-5. **Accessible and Usable**:
+4. **Accessible and Usable**:
    - Semantic HTML.
    - ARIA roles where needed.
    - High-contrast colors and screen reader-friendly navigation.
@@ -49,7 +45,6 @@ The final product features:
 - **Frameworks/Libraries**: None.
 - **Hosting**:
   - The project is live on GitHub Pages.
-  - Alternative hosting platforms like Netlify or Vercel can be used.
 
 ---
 
@@ -93,10 +88,9 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 
 ## **Credits**
 - Starter HTML provided by DEV.to challenge.
-- Design, development, and enhancements by [Your Name].
+- Design, development, and enhancements by Jeff.
 
 ---
 
-## **License**
-This project is licensed under the MIT License. See `LICENSE` for details.
+
 
