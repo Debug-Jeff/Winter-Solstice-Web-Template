@@ -1188,3 +1188,257 @@ canvas {
     opacity: 1;
   }
 }
+
+/* Base responsive settings */
+@media screen and (max-width: 1024px) {
+  /* Navigation */
+  #main-nav ul {
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  #main-nav a {
+    font-size: 11px;
+    padding: 5px;
+  }
+
+  /* Introduction */
+  #introduction {
+    padding-top: 100px;
+    padding-right: 20px;
+    padding-left: 20px;
+    height: auto;
+    min-height: 70vh;
+  }
+
+  #introduction span {
+    font-size: 30px;
+  }
+
+  #introduction h2 {
+    font-size: 24px;
+  }
+
+  #introduction p {
+    font-size: 16px;
+  }
+
+  /* Science Section */
+  .container, .container-2 {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 10px;
+  }
+
+  .divider {
+    width: 80%;
+    height: 4px;
+    margin: 20px 0;
+  }
+
+  .image-content img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Hemispheres Section */
+  .hem-content {
+    padding: 40px 20px;
+    height: auto;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+
+  /* Celebrations Section */
+  .parent {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .nr-text, .iy-text, .mn-text, .kd-text {
+    font-size: 0.9rem;
+  }
+
+  /* Traditions Section */
+  .traditions-content {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 10px;
+  }
+
+  .td-content ul {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .td-content li:nth-child(5) {
+    grid-column: 1;
+  }
+
+  /* Hex Grid */
+  .hex-grid {
+    padding: 0;
+  }
+
+  .hex {
+    width: 150px;
+    height: 173px;
+  }
+
+  .hex-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 0 !important;
+    transform: none !important;
+  }
+
+  /* Conclusion */
+  .glass-box {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .glass-box h1 {
+    font-size: 2rem;
+  }
+
+  .glass-box p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Header */
+  #main-header h1 {
+    font-size: 24px;
+  }
+
+  /* Navigation */
+  #main-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Welcome Button */
+  .blob-btn {
+    padding: 15px 36px;
+    font-size: 14px;
+  }
+
+  /* Winter Animation */
+  #winter .breathe-animation span {
+    font-size: clamp(3vw, 8vw, 20vh);
+  }
+
+  /* Science Section */
+  #science h2 {
+    font-size: 24px;
+    margin-left: 10px;
+  }
+
+  /* Celebrations */
+  .parent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .box {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+
+  .box:hover {
+    width: 100%;
+    height: 30px;
+  }
+
+  .hover-text {
+    writing-mode: horizontal-tb;
+  }
+
+  /* Hex Grid */
+  .hex {
+    width: 120px;
+    height: 138px;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    margin: 1% auto;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Introduction */
+  #introduction span {
+    font-size: 24px;
+  }
+
+  #introduction h2 {
+    font-size: 20px;
+  }
+
+  #introduction p {
+    font-size: 14px;
+  }
+
+  /* Science Section */
+  .text-content, .text-content-2 {
+    font-size: 14px;
+  }
+
+  /* Hemispheres */
+  .hem-content h2 {
+    font-size: 24px;
+  }
+
+  /* Traditions */
+  .td-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .td-content li {
+    font-size: 0.9rem;
+  }
+
+  /* Hex Grid */
+  .hex {
+    width: 100px;
+    height: 115px;
+  }
+
+  /* Footer */
+  #footer-nav ul li {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .easter-egg {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .box:hover,
+  .hex:hover,
+  .td-content li:hover {
+    transform: none;
+  }
+
+  .parent:hover {
+    transform: none;
+  }
+
+  .glass-box:hover {
+    box-shadow: none;
+  }
+}
+
